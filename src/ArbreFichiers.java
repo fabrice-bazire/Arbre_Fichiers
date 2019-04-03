@@ -69,11 +69,12 @@ public class ArbreFichiers {
                 node.frered = tmp.frered;
             }
         }
-        tmp = this;
+        //NE FONCTIONNE PAS !!!
+        /*tmp = this;
         while(tmp.name != ""){//mise a jour de la taille des noeuds jusqu'à la racine
             tmp.size = tmp.size + node.size;
             tmp = tmp.pere;
-        }
+        }*/
     }
 
     //Méthode 2
@@ -84,19 +85,21 @@ public class ArbreFichiers {
     //Méthode 3
     public String info (){
         String s = "";
-        ArbreFichiers tmp = this.fils1;
-        if (tmp.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite et afficher dans l'ordre alphabétique
-            tmp = tmp.frereg;
-        }
-        while (tmp.frered != null){//on va jusqu'au bout à droite
-            if (tmp.type){
-                s+="f";
-            }else{
-                s+="d";
+        if (this.fils1 != null){
+            ArbreFichiers tmp = this.fils1;
+            if (tmp.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite et afficher dans l'ordre alphabétique
+                tmp = tmp.frereg;
             }
-            s += " " + tmp.name + " " + String.valueOf(tmp.size) + " ";
-            if (tmp.fils1 != null){
-                s += tmp.fils1.info();
+            while (tmp.frered != null){//on va jusqu'au bout à droite
+                if (tmp.type){
+                    s+="f";
+                }else{
+                    s+="d";
+                }
+                s += " " + tmp.name + " " + String.valueOf(tmp.size) + " ";
+                if (tmp.fils1 != null){
+                    s += tmp.fils1.info();
+                }
             }
         }
         return s;
@@ -113,10 +116,12 @@ public class ArbreFichiers {
         return new ArbreFichiers();
     }
 
-    public void main (String[]args){
+    public static void main (String[]args){
+        //Test des méthodes add et info
         ArbreFichiers test = new ArbreFichiers();
         test.add(new ArbreFichiers(null, null, null, null, "test2", true, "bonjour tout le monde", "bonjour tout le monde".length()));
         test.add(new ArbreFichiers(null, null, null, null, "test3", true, "hello everybody", "hello everybody".length()));
         test.add(new ArbreFichiers(null, null, null, null, "dossierdetest", false, null, 0));
+        System.out.print(test.info());
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Arbre_Fichiers.iml" filepath="$PROJECT_DIR$/Arbre_Fichiers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Arbre_Fichiers.iml" filepath="$PROJECT_DIR$/.idea/Arbre_Fichiers.iml" />
     </modules>
   </component>
 </project>
