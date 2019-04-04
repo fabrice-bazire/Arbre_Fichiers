@@ -130,28 +130,5 @@ public class ArbreFichiers {
 
     public static void main (String[]args){
         //Test des méthodes add et info
-        ArbreFichiers test = new ArbreFichiers(null, null, null, null, "root", false, null, 0);
-        System.out.println("1");
-        test.add(new ArbreFichiers(null, null, null, null, "test4", true, "bonjour tout le monde", "bonjour tout le monde".length()));
-        System.out.println("2");
-        test.add(new ArbreFichiers(null, null, null, null, "test3", true, "bonjour tout le monde", "bonjour tout le monde".length()));
-        System.out.println("2");
-        test.add(new ArbreFichiers(null, null, null, null, "test1", true, "hello everybody", "hello everybody".length()));
-        System.out.println("3");
-        test.add(new ArbreFichiers(null, null, null, null, "test0", false, null, 0));
-        System.out.println("4");
-        test.add(new ArbreFichiers(null, null, null, null, "dossierdetest", false, null, 0));
-        System.out.println("5");
-        //System.out.println(test.info());
-        System.out.println("nom fils 1 : " + test.fils1.name);
-        System.out.println(test.fils1.frered.name);
-        System.out.println(test.fils1.frered.frered.name);
-        test.add(new ArbreFichiers(null, null, null, null, "test2", true, "bonjour tout le monde", "bonjour tout le monde".length()));
-        System.out.println("7");
-        System.out.println("nom fils 1 : " + test.fils1.name);
-        System.out.println(test.fils1.frereg.name);
-        System.out.println(test.fils1.frereg.frereg.name);
-        System.out.println(test.fils1.frered.name);
-        System.out.println(test.fils1.frereg.frereg.frereg.name);
     }
 }
