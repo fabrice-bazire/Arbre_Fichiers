@@ -48,33 +48,45 @@ public class ArbreFichiers {
         return this.contenu;
     }
 
+    public void decaler1posdroite () {
+        ArbreFichiers tmp;
+        tmp = this.fils1;
+        this.fils1 = this.fils1.frered;
+        this.fils1.frereg = tmp;
+    }
+
+    public void decaler1posgauche () {
+        ArbreFichiers tmp;
+        tmp = this.fils1;
+        this.fils1 = this.fils1.frereg;
+        this.fils1.frered = tmp;
+    }
+
     //Méthode 1
     public void add (ArbreFichiers node){
-        ArbreFichiers tmp = this.fils1;
-        node.pere = this;
-        if (tmp == null){
-            tmp = node;
+        ArbreFichiers tmp;
+        if (this.fils1 == null){
+            this.fils1 = node;
         }else {
-            if (tmp.name.compareToIgnoreCase(node.name) > 0) {
-                while (tmp.name.compareToIgnoreCase(node.name) > 0) { //if this.fils1.name est apres node.name dans l'ordre alphabétique
-                    tmp = tmp.frered;
+            if (this.fils1.name.compareToIgnoreCase(node.name) > 0) {
+                while (this.fils1.frereg != null && this.fils1.name.compareToIgnoreCase(node.name) > 0) {
+                    this.decaler1posgauche();
                 }
-                node.frered = tmp.frered;
-                node.frereg = tmp.frereg;
+                tmp = this.fils1;
+                this.fils1 = node;
+                this.fils1.frered = tmp;
+                this.fils1.frereg = tmp.frereg;
             } else {
-                while (tmp.name.compareToIgnoreCase(node.name) <= 0) { //if this.fils1.name est avant node.name dans l'ordre alphabétique
-                    tmp = tmp.frereg;
+                while (this.fils1.frered != null && this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
+                    this.decaler1posdroite();
                 }
-                node.frereg = tmp.frereg;
-                node.frered = tmp.frered;
+                this.decaler1posgauche();
+                tmp = this.fils1;
+                this.fils1 = node;
+                this.fils1.frereg = tmp;
+                this.fils1.frered = tmp.frered;
             }
         }
-        //NE FONCTIONNE PAS !!!
-        /*tmp = this;
-        while(tmp.name != ""){//mise a jour de la taille des noeuds jusqu'à la racine
-            tmp.size = tmp.size + node.size;
-            tmp = tmp.pere;
-        }*/
     }
 
     //Méthode 2
@@ -118,10 +130,28 @@ public class ArbreFichiers {
 
     public static void main (String[]args){
         //Test des méthodes add et info
-        ArbreFichiers test = new ArbreFichiers();
-        test.add(new ArbreFichiers(null, null, null, null, "test2", true, "bonjour tout le monde", "bonjour tout le monde".length()));
-        test.add(new ArbreFichiers(null, null, null, null, "test3", true, "hello everybody", "hello everybody".length()));
+        ArbreFichiers test = new ArbreFichiers(null, null, null, null, "root", false, null, 0);
+        System.out.println("1");
+        test.add(new ArbreFichiers(null, null, null, null, "test4", true, "bonjour tout le monde", "bonjour tout le monde".length()));
+        System.out.println("2");
+        test.add(new ArbreFichiers(null, null, null, null, "test3", true, "bonjour tout le monde", "bonjour tout le monde".length()));
+        System.out.println("2");
+        test.add(new ArbreFichiers(null, null, null, null, "test1", true, "hello everybody", "hello everybody".length()));
+        System.out.println("3");
+        test.add(new ArbreFichiers(null, null, null, null, "test0", false, null, 0));
+        System.out.println("4");
         test.add(new ArbreFichiers(null, null, null, null, "dossierdetest", false, null, 0));
-        System.out.print(test.info());
+        System.out.println("5");
+        //System.out.println(test.info());
+        System.out.println("nom fils 1 : " + test.fils1.name);
+        System.out.println(test.fils1.frered.name);
+        System.out.println(test.fils1.frered.frered.name);
+        test.add(new ArbreFichiers(null, null, null, null, "test2", true, "bonjour tout le monde", "bonjour tout le monde".length()));
+        System.out.println("7");
+        System.out.println("nom fils 1 : " + test.fils1.name);
+        System.out.println(test.fils1.frereg.name);
+        System.out.println(test.fils1.frereg.frereg.name);
+        System.out.println(test.fils1.frered.name);
+        System.out.println(test.fils1.frereg.frereg.frereg.name);
     }
 }
