@@ -74,17 +74,16 @@ public class ArbreFichiers {
                 }
                 tmp = this.fils1;
                 this.fils1 = node;
-                this.fils1.frered = tmp;
                 this.fils1.frereg = tmp.frereg;
+                this.fils1.frered = tmp;
             } else {
                 while (this.fils1.frered != null && this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
                     this.decaler1posdroite();
                 }
-                this.decaler1posgauche();
                 tmp = this.fils1;
                 this.fils1 = node;
-                this.fils1.frereg = tmp;
                 this.fils1.frered = tmp.frered;
+                this.fils1.frereg = tmp;
             }
         }
     }
@@ -98,20 +97,23 @@ public class ArbreFichiers {
     public String info (){
         String s = "";
         if (this.fils1 != null){
-            ArbreFichiers tmp = this.fils1;
-            if (tmp.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite et afficher dans l'ordre alphabétique
-                tmp = tmp.frereg;
+            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite et afficher dans l'ordre alphabétique
+                this.decaler1posgauche();
             }
-            while (tmp.frered != null){//on va jusqu'au bout à droite
-                if (tmp.type){
+            while (this.fils1 != null){//on va jusqu'au bout à droite
+                if (this.fils1.type){
                     s+="f";
                 }else{
                     s+="d";
                 }
-                s += " " + tmp.name + " " + String.valueOf(tmp.size) + " ";
-                if (tmp.fils1 != null){
-                    s += tmp.fils1.info();
-                }
+                s += " " + this.fils1.name + " " + String.valueOf(this.fils1.size) + " ";
+                /*if (this.fils1.fils1 != null){
+                    System.out.println("a");
+                    s += this.fils1.fils1.info();
+                    System.out.print(this.fils1.fils1.info() + "test\n");
+                }*/
+                s+="\n";
+                this.fils1 = this.fils1.frered;
             }
         }
         return s;
@@ -130,5 +132,16 @@ public class ArbreFichiers {
 
     public static void main (String[]args){
         //Test des méthodes add et info
+        ArbreFichiers test = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
+        test.add(new ArbreFichiers(null,null,null,null, "dactylo", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "chaise", true, "hello everybody", "hello everybody".length()));
+        test.add(new ArbreFichiers(null,null,null,null, "ballon", false, null, 0));;
+        test.add(new ArbreFichiers(null,null,null,null, "feuille", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "electrique", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "arbre", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "wagon", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "mer", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "zebre", false, null, 0));
+        System.out.println(test.info());
     }
 }
