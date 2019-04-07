@@ -1,4 +1,8 @@
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import java.io.File;
 import java.lang.String;
 
 public class ArbreFichiers {
@@ -70,7 +74,7 @@ public class ArbreFichiers {
         
     }
 
-    public String info (ArbreFichiers t){
+   /** public String info (ArbreFichiers t){ // methode 3
         String s = "";
         if (t.type == false){
             s += "d\n";
@@ -91,16 +95,64 @@ public class ArbreFichiers {
         return s;
     }
 
-    public String met4 (){
-        String s = "";
-        return s;
+**/
+    
+    
+    private File[] listfichiers()/** methode pour la liste des fichiers **/
+    {
+    	
+      
+      if (!m_fichier.isDirectory())
+        return null;
+      try
+      {
+        return m_fichier.listFiles();
+      }
+      catch (Exception ex)
+      {
+        JOptionPane.showMessageDialog(null, 
+          "Erreur de lecture du répertoire "+m_fichier.getAbsolutePath(),
+          "Warning", JOptionPane.WARNING_MESSAGE);
+        return null;
+      }
     }
+    
+    
+    
+    
+    public String ContientDesSousRepertoires()/** methode 3, verifie si ce sous repertoires a des sous-repertoires **/
+    {
+    	
+      String s = "";
+      File[] fichiers = listfichiers();
+      if (fichiers == null)
+    	  s += "f\n";
+      	
+      for (int k=0; k<fichiers.length; k++)
+      {
+        if (fichiers[k].isDirectory())
+        	s += "d\n";
+      }
+      return s;
+     
+    }
+    private File m_fichier; /**, methode 4, fichier du type File **/
+    	public String toString() /** methode retourne le nom de fichier et son chemin **/
+    	  { 
+    	    return m_fichier.getName().length() > 0 ? m_fichier.getName() : 
+    	      m_fichier.getPath();
+    	  }
 
     public ArbreFichiers met5 (String s){
         return new ArbreFichiers();
     }
 
     public void main (String[]args){
-
+    	new ArbreFichiers();
     }
+    
+    
+    
+    
+    
 }
