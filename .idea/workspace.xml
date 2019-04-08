@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4575eefa-4a82-42b3-8d8b-6e5668dd38df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Arbre_Fichiers/ArbreFichiers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Arbre_Fichiers/ArbreFichiers.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArbreFichiers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArbreFichiers.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,12 +17,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ArbreFichiers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="151" column="25" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
+            <state relative-caret-position="466">
+              <caret line="101" column="30" lean-forward="true" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4060#4061#0" expanded="true" />
-                <element signature="e#4102#4103#0" expanded="true" />
+                <element signature="e#4128#4129#0" expanded="true" />
+                <element signature="e#4170#4171#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,7 +95,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554644894927" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554709351908" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -173,18 +171,18 @@
       <workItem from="1554365892566" duration="1134000" />
       <workItem from="1554378421511" duration="2498000" />
       <workItem from="1554640400215" duration="1701000" />
-      <workItem from="1554642161563" duration="2656000" />
+      <workItem from="1554642161563" duration="7112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18020000" />
+    <option name="totallyTimeSpent" value="22476000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="978" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2863248" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13736264" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -234,12 +232,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ArbreFichiers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="151" column="25" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
+        <state relative-caret-position="466">
+          <caret line="101" column="30" lean-forward="true" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4060#4061#0" expanded="true" />
-            <element signature="e#4102#4103#0" expanded="true" />
+            <element signature="e#4128#4129#0" expanded="true" />
+            <element signature="e#4170#4171#0" expanded="true" />
           </folding>
         </state>
       </provider>

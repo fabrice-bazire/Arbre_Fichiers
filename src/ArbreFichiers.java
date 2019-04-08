@@ -72,11 +72,11 @@ public class ArbreFichiers {
                 while (this.fils1.frereg != null && this.fils1.name.compareToIgnoreCase(node.name) > 0) {
                     this.decaler1posgauche();
                 }
-                if (this.fils1.name.compareToIgnoreCase(node.name) > 0){
+                if (this.fils1.name.compareToIgnoreCase(node.name) > 0) {
                     node.frereg = this.fils1.frereg;
                     node.frered = this.fils1;
                     this.fils1 = node;
-                }else{
+                } else {
                     node.frered = this.fils1.frered;
                     node.frereg = this.fils1;
                     this.fils1 = node;
@@ -85,11 +85,11 @@ public class ArbreFichiers {
                 while (this.fils1.frered != null && this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
                     this.decaler1posdroite();
                 }
-                if (this.fils1.name.compareToIgnoreCase(node.name) <= 0){
+                if (this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
                     node.frered = this.fils1.frered;
                     node.frereg = this.fils1;
                     this.fils1 = node;
-                }else{
+                } else {
                     node.frereg = this.fils1.frereg;
                     node.frered = this.fils1;
                     this.fils1 = node;
@@ -97,7 +97,11 @@ public class ArbreFichiers {
 
             }
         }
-        //maj taille
+        tmp = this;
+        while (tmp != null){
+            tmp.size += node.size;
+            tmp = tmp.pere;
+        }
     }
 
     //Méthode 2
@@ -114,11 +118,11 @@ public class ArbreFichiers {
             }
             while (this.fils1 != null){//on va jusqu'au bout à droite
                 if (this.fils1.type){
-                    s+="f";
+                    s+="fichier : ";
                 }else{
-                    s+="d";
+                    s+="dossier : ";
                 }
-                s += " " + this.fils1.name + " " + String.valueOf(this.fils1.size) + " ";
+                s += " " + this.fils1.name + " (taille : " + String.valueOf(this.fils1.size) + " kb)";
                 if (this.fils1.fils1 != null){
                     System.out.println("a");
                     s += this.fils1.fils1.info();
@@ -145,15 +149,18 @@ public class ArbreFichiers {
     public static void main (String[]args){
         //Test des méthodes add et info
         ArbreFichiers test = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
-        test.add(new ArbreFichiers(null,null,null,null, "dactylo", false, null, 0));
-        test.add(new ArbreFichiers(null,null,null,null, "chaise", true, "hello everybody", "hello everybody".length()));
-        test.add(new ArbreFichiers(null,null,null,null, "ballon", false, null, 0));;
-        test.add(new ArbreFichiers(null,null,null,null, "feuille", false, null, 0));
-        test.fils1.add(new ArbreFichiers(null,null,null,null, "electrique", false, null, 0));
-        test.add(new ArbreFichiers(null,null,null,null, "arbre", false, null, 0));
-        test.add(new ArbreFichiers(null,null,null,null, "wagon", false, null, 0));
-        test.fils1.add(new ArbreFichiers(null,null,null,null, "mer", false, null, 0));
-        test.fils1.add(new ArbreFichiers(null,null,null,null, "zebre", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "francais", true, "bonjour", "bonjour".length()));
+        System.out.println(test.fils1.name);
+        System.out.println(test.size);
+        test.add(new ArbreFichiers(null,null,null,null, "anglais", true, "hello", "hello".length()));
+        System.out.println(test.fils1.name);
+        System.out.println(test.size);
+        test.add(new ArbreFichiers(null,null,null,null, "allemand", true, "hallo", "hallo".length()));
+        System.out.println(test.fils1.name);
+        System.out.println(test.size);
+        test.add(new ArbreFichiers(null,null,null,null, "suedois", true, "hej", "hej".length()));
+        System.out.println(test.fils1.name);
+        System.out.println(test.size);
         System.out.println(test.info());
     }
 }
