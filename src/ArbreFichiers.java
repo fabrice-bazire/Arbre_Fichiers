@@ -106,14 +106,34 @@ public class ArbreFichiers {
 
     //Méthode 2
     public void delete () {
-        
+        int taillearetirer = this.fils1.size;
+        ArbreFichiers tmp;
+        if (this.fils1.frereg == null) {
+            this.fils1.frered.frereg = null;
+            this.fils1 = this.fils1.frered;
+        }
+        if (this.fils1.frered == null) {
+                this.fils1.frereg.frered = null;
+                this.fils1 = this.fils1.frereg;
+        }
+        if (this.fils1.frereg != null && this.fils1.frered != null){
+            tmp = this.fils1;
+            this.fils1 = this.fils1.frereg;
+            this.fils1.frereg = tmp.frereg.frereg;
+            this.fils1.frered = tmp.frered;
+        }
+        tmp = this;
+        while (tmp != null){
+            tmp.size = tmp.size - taillearetirer;
+            tmp = tmp.pere;
+        }
     }
 
     //Méthode 3
     public String info (){
         String s = "";
         if (this.fils1 != null){
-            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite et afficher dans l'ordre alphabétique
+            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite
                 this.decaler1posgauche();
             }
             while (this.fils1 != null){//on va jusqu'au bout à droite
@@ -137,30 +157,54 @@ public class ArbreFichiers {
 
     //Méthode 4
     public String info_branche (){
-        String s = "";
+        ArbreFichiers tmp = this;
+        String s = tmp.fils1.name;
+        while (tmp != null){
+            System.out.println(tmp.name);
+            s = tmp.name + "/" + s;
+            tmp = tmp.pere;
+        }
         return s;
     }
+    //A REVOIR !!!!
 
     //Méthode 5
     public ArbreFichiers acces (String s){
-        return new ArbreFichiers();
+        if (s.equals("..")){
+            return this.pere;
+        }else{
+            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite
+                this.decaler1posgauche();
+            }
+            try {
+                while (this.fils1 != null) {//on va jusqu'au bout à droit
+                    if (this.fils1.type == false && this.fils1.name.equals(s)) {
+                        return this.fils1;
+                    }
+                    this.fils1 = this.fils1.frered;
+                }
+            }catch(Exception e){
+                System.out.println("Le dossier \"" + s +"\" n'existe pas");
+            }
+        }
+        return null;
     }
 
     public static void main (String[]args){
         //Test des méthodes add et info
         ArbreFichiers test = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
         test.add(new ArbreFichiers(null,null,null,null, "francais", true, "bonjour", "bonjour".length()));
-        System.out.println(test.fils1.name);
-        System.out.println(test.size);
         test.add(new ArbreFichiers(null,null,null,null, "anglais", true, "hello", "hello".length()));
-        System.out.println(test.fils1.name);
-        System.out.println(test.size);
         test.add(new ArbreFichiers(null,null,null,null, "allemand", true, "hallo", "hallo".length()));
-        System.out.println(test.fils1.name);
-        System.out.println(test.size);
-        test.add(new ArbreFichiers(null,null,null,null, "suedois", true, "hej", "hej".length()));
-        System.out.println(test.fils1.name);
-        System.out.println(test.size);
+        /*test.add(new ArbreFichiers(null,null,null,null, "suedois", false, null, 0));
+        test.fils1.add(new ArbreFichiers(null,null,null,null, "suisse", false, null, 0));
+        test.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "danois", false, null, 0));
+        test.fils1.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "amical", true, "hey", "hey".length()));
+        System.out.println("danois : " + test.fils1.fils1.fils1.size);
+        System.out.println("suisse : " + test.fils1.fils1.size);
+        System.out.println("suedois : " + test.fils1.size);
+        System.out.println("root : " + test.size);*/
         System.out.println(test.info());
+        System.out.println(test.acces("francais") == null);
     }
 }
