@@ -11,6 +11,8 @@ public class Test {
     }
 
     public static void main (String[]args){
-        System.out.println("fact 5 : " + factorielle(5));
+        String h = "racine";
+        System.out.println(!h.equals("racin"));
+        //System.out.println("fact 5 : " + factorielle(5));
     }
 }

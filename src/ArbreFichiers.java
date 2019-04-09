@@ -45,7 +45,7 @@ public class ArbreFichiers {
     }
 
     public String getContenu () {
-        return this.contenu;
+        return this.fils1.contenu;
     }
 
     public void decaler1posdroite () {
