@@ -168,6 +168,16 @@ public class ArbreFichiers {
     }
     //A REVOIR !!!!
 
+    /*public String info_branche (){
+        String s = "";
+        if (this.pere.name.equals("root")){
+            return ("root/" + this.name);
+        }else{
+            s+=this.pere.info_branche();
+        }
+        return s;
+    }*/
+
     //Méthode 5
     public ArbreFichiers acces (String s){
         if (s.equals("..")){
@@ -196,15 +206,14 @@ public class ArbreFichiers {
         test.add(new ArbreFichiers(null,null,null,null, "francais", true, "bonjour", "bonjour".length()));
         test.add(new ArbreFichiers(null,null,null,null, "anglais", true, "hello", "hello".length()));
         test.add(new ArbreFichiers(null,null,null,null, "allemand", true, "hallo", "hallo".length()));
-        /*test.add(new ArbreFichiers(null,null,null,null, "suedois", false, null, 0));
+        test.add(new ArbreFichiers(null,null,null,null, "suedois", false, null, 0));
         test.fils1.add(new ArbreFichiers(null,null,null,null, "suisse", false, null, 0));
         test.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "danois", false, null, 0));
         test.fils1.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "amical", true, "hey", "hey".length()));
         System.out.println("danois : " + test.fils1.fils1.fils1.size);
         System.out.println("suisse : " + test.fils1.fils1.size);
         System.out.println("suedois : " + test.fils1.size);
-        System.out.println("root : " + test.size);*/
-        System.out.println(test.info());
-        System.out.println(test.acces("francais") == null);
+        System.out.println(test.info_branche());
+        //System.out.println(test.info());
     }
 }
