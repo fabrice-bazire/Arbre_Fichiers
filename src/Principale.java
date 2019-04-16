@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Principale {
 
     public static ArbreFichiers creation_arbre_depuis_fichier () {
+        ArbreFichiers tmp;
         String fichier = "src/toto.txt";
         String i;
         String contenu;
@@ -30,10 +31,16 @@ public class Principale {
                     }
                     x = i.split(" ");
                     if (x[0].charAt(0) == '*'){
-                        if (x[2].equals("d") && x[0].length() == 1) {
-                            arbre.add(new ArbreFichiers(null,null,null,null, x[1], false, null, 0));
+                        if (x[1].equals("fin")){
+                            arbre = arbre.getPere();
                         }
-                        if (x[2].equals("f") && x[0].length() == 1){
+                        if (x[2].equals("d")) {
+                            arbre.add(new ArbreFichiers(null,null,null,null, x[1], false, null, 0));
+                            tmp = arbre;
+                            arbre = arbre.getFils1();
+                            arbre.setPere(tmp);
+                        }
+                        if (x[2].equals("f")){
                             contenu = b.readLine();
                             arbre.add(new ArbreFichiers(null,null,null,null, x[1], true, contenu, contenu.length()));
                         }
@@ -51,7 +58,14 @@ public class Principale {
         return null;
     }
 
+    public static void implemente_commandes (ArbreFichiers a, String s){
+        if (s.equals("ls")){
+            System.out.println(a.info());
+        }
+    }
+
     public static void main (String[]args){
-        System.out.println(creation_arbre_depuis_fichier().info());
+        ArbreFichiers arbre = creation_arbre_depuis_fichier();
+        implemente_commandes(arbre.getFils1().getFrereg(), "ls");
     }
 }
