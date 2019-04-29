@@ -6,6 +6,7 @@ public class Principale {
     static Scanner in = new Scanner (System.in);
 
     //etape 2
+    //Méthode qui depuis un fichier respectant le format indiqué dans le sujet du projet retourne l'arbreFichiers correspondant
     public static ArbreFichiers creation_arbre_depuis_fichier (String fichier) {
         ArbreFichiers tmp;
         String i;
@@ -61,6 +62,7 @@ public class Principale {
     }
 
     //etape 3
+    //Méthode qui selon la commande passée en paramètre va l'éxécuter sur l'arbreFichiers en paramètre
     public static void implemente_commandes (ArbreFichiers a, String s){
         String[] x = s.split(" ");
         if (x[0].equals("ls")){
@@ -119,6 +121,7 @@ public class Principale {
         }
     }
 
+    //Le main constitue le menu interactif dans lequel on peut saisir les commandes
     public static void main (String[]args){
         ArbreFichiers arbre;
         if (args[0].equals("")){
