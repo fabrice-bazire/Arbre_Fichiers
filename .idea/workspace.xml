@@ -55,7 +55,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Principale.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-464">
+            <state relative-caret-position="-182">
               <caret line="123" column="83" selection-start-line="123" selection-start-column="83" selection-end-line="123" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -151,7 +151,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556527088890" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556570150243" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -236,12 +236,12 @@
       <workItem from="1554931020542" duration="9699000" />
       <workItem from="1556101407230" duration="1909000" />
       <workItem from="1556221123684" duration="3438000" />
-      <workItem from="1556524360182" duration="3888000" />
+      <workItem from="1556524360182" duration="3910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60955000" />
+    <option name="totallyTimeSpent" value="60977000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="980" extended-state="0" />
@@ -256,7 +256,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32545045" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32545045" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39841986" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -344,7 +344,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Principale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-464">
+        <state relative-caret-position="-182">
           <caret line="123" column="83" selection-start-line="123" selection-start-column="83" selection-end-line="123" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
