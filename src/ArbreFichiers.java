@@ -45,7 +45,7 @@ public class ArbreFichiers {
     }
 
     public String getContenu () {
-        return this.fils1.contenu;
+        return this.contenu;
     }
 
     public void decaler1posdroite () {
@@ -138,6 +138,7 @@ public class ArbreFichiers {
     //Méthode 3
     public String info (){
         String s = "";
+        ArbreFichiers tmp = this.fils1;
         if (this.fils1 != null){
             while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite
                 this.decaler1posgauche();
@@ -156,6 +157,7 @@ public class ArbreFichiers {
                 this.fils1 = this.fils1.frered;
             }
         }
+        this.fils1 = tmp; //pour ne pas perdre le pointeur
         return s;
     }
     //OK
@@ -165,24 +167,11 @@ public class ArbreFichiers {
         ArbreFichiers tmp = this;
         String s = "";
         while (tmp != null){
-            System.out.println(tmp.pere == null);
             s = tmp.name + "/" + s;
             tmp = tmp.pere;
         }
         return s;
     }
-    //A REVOIR !!!!
-
-    //Methode Ellias
-    /*public String info_branche (){
-        String s = "";
-        if (this.pere.name.equals("root")){
-            return ("root/" + this.name);
-        }else{
-            s+=this.pere.info_branche();
-        }
-        return s;
-    }*/
 
     //Méthode 5
     public ArbreFichiers acces (String s) {
@@ -194,13 +183,13 @@ public class ArbreFichiers {
             }
             try {
                 while (this.fils1 != null) {//on va jusqu'au bout à droit
-                    if (this.fils1.name.equals(s) && this.fils1.type == false) {
+                    if (this.fils1.name.equals(s)) {
                         return this.fils1;
                     }
                     this.fils1 = this.fils1.frered;
                 }
             }catch(Exception e){
-                System.out.println("Le dossier \"" + s +"\" n'existe pas");
+                System.out.println("Le fichier/dossier \"" + s +"\" n'existe pas");
             }
         }
         return null;
@@ -246,32 +235,5 @@ public class ArbreFichiers {
 
     public int getSize() {
         return size;
-    }
-
-    public static void main (String[]args){
-        //Test des méthodes add et info
-        ArbreFichiers test = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
-        test.add(new ArbreFichiers(null,null,null,null, "francais", true, "bonjour", "bonjour".length()));
-        test.add(new ArbreFichiers(null,null,null,null, "allemand", false, null,0));
-        test.add(new ArbreFichiers(null,null,null,null, "bool", false, null,0));
-        test.add(new ArbreFichiers(null,null,null,null, "chaise", false, null,0));
-        test.add(new ArbreFichiers(null,null,null,null, "anglais", false, null, 0));
-        test.fils1.add(new ArbreFichiers(null,null,null,null, "italie", true, "heyé", "heye".length()));
-        //test.add(new ArbreFichiers(null,null,null,null, "suedois", true, "hej", "hej".length()));
-        /*test.add(new ArbreFichiers(null,null,null,null, "suedois", false, null, 0));
-        test.fils1.add(new ArbreFichiers(null,null,null,null, "suisse", false, null, 0));
-        test.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "danois", false, null, 0));
-        test.fils1.fils1.fils1.add(new ArbreFichiers(null,null,null,null, "amical", true, "hey", "hey".length()));
-        System.out.println("danois : " + test.fils1.fils1.fils1.size);
-        System.out.println("suisse : " + test.fils1.fils1.size);
-        System.out.println("suedois : " + test.fils1.size);
-        System.out.println(test.info_branche());*/
-        //System.out.println(test.fils1.name);
-        //System.out.println(test.info());
-        //System.out.println(test.fils1.info());
-        System.out.println(test.fils1.name);
-        System.out.println(test.fils1.pere.name);
-        System.out.println(test.fils1.fils1.name);
-        System.out.println(test.fils1.fils1.pere.name);
     }
 }

@@ -1,6 +1,6 @@
 racine
 * un_fichier f
-ceci constitue le contenu de ce fichier
+ceci constitue le contenu de ___ce ___fichier
 * sd1 d %ceci est un commentaire : le dossier sd1 a pour pere la racine 
 ** un_autre_fichier f %cet autre fichier est inclus dans sd1
 ceci constitue le contenu de cet autre fichier
