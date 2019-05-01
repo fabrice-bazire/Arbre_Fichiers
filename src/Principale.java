@@ -123,11 +123,12 @@ public class Principale {
 
     //Le main constitue le menu interactif dans lequel on peut saisir les commandes
     public static void main (String[]args){
-        ArbreFichiers arbre;
-        if (args[0].equals("")){
-            arbre = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
-        }else {
-            arbre = creation_arbre_depuis_fichier(args[0]);
+        ArbreFichiers arbre = new ArbreFichiers(null,null,null,null, "root", false, null, 0);
+        if (args != null){
+            try {
+                arbre = creation_arbre_depuis_fichier(args[0]);
+            }catch (ArrayIndexOutOfBoundsException e){
+            }
         }
         String commande= "";
         while (! commande.equals("quit") || ! commande.equals("exit")){
