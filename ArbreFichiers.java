@@ -1,14 +1,11 @@
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
-import java.io.File;
 import java.lang.String;
 
 public class ArbreFichiers {
 
     static Scanner sc = new Scanner (System.in);
 
+    //déclaration de l'objet ArbreFichiers
     private ArbreFichiers pere;
     private ArbreFichiers fils1;
     private ArbreFichiers frereg;
@@ -18,6 +15,7 @@ public class ArbreFichiers {
     private String contenu;
     private int size;
 
+    //Contructeur d'ArbreFichiers sans parametre : null
     ArbreFichiers (){
          pere = null;
          fils1 = null;
@@ -29,6 +27,7 @@ public class ArbreFichiers {
          size = 0;
     }
 
+    //creation d'un arbreFichiers  avec parametre
     ArbreFichiers (ArbreFichiers p, ArbreFichiers f1, ArbreFichiers fg, ArbreFichiers fd, String name, boolean type, String content, int size){
         pere = p;
         fils1 = f1;
@@ -40,119 +39,218 @@ public class ArbreFichiers {
         this.size = size;
     }
 
+    //Méthode pour recuperer le pere d'un arbreFichier
     public ArbreFichiers getPere (){
         return this.pere;
     }
 
+    //Méthode pour recuperer le type d'un arbreFichier
     public boolean getType () {
         return this.type;
     }
 
+    //Méthode pour recuperer le contenu d'un arbreFichier lorssque celui ci est de type fichier
     public String getContenu () {
         return this.contenu;
     }
 
+    //Cette méthode attribue au Fils1 de l'objet appelant son frere droit
+    public void decaler1posdroite () {
+        ArbreFichiers tmp;
+        tmp = this.fils1;
+        this.fils1 = this.fils1.frered;
+        this.fils1.frereg = tmp;
+    }
+
+    //Cette méthode attribue au Fils1 de l'objet appelant son frere gauche
+    public void decaler1posgauche () {
+        ArbreFichiers tmp;
+        tmp = this.fils1;
+        this.fils1 = this.fils1.frereg;
+        this.fils1.frered = tmp;
+    }
+
+    //Méthode qui ajoute un ArbreFichiers (node) à l'objet appelant
     public void add (ArbreFichiers node){
-        node.pere = this;
-        if (this.fils1 == null && this.frereg == null && this.frered == null){
+        //System.out.println(this.name);
+        ArbreFichiers tmp;
+        if (this.fils1 == null){
             this.fils1 = node;
-        }else{
-            if (fils1.pere.name.compareToIgnoreCase(node.name) < 0){
-                ArbreFichiers tmp = fils1;
-                ArbreFichiers tmp1 = frereg;
-                this.fils1 = node;
-                frereg = tmp;
-                tmp = frered;
-                frered = tmp1;
-                //tmp ?
+        }else {
+            if (this.fils1.name.compareToIgnoreCase(node.name) > 0) {
+                while (this.fils1.frereg != null && this.fils1.name.compareToIgnoreCase(node.name) > 0) {
+                    this.decaler1posgauche();
+                }
+                if (this.fils1.name.compareToIgnoreCase(node.name) > 0) {
+                    node.frereg = this.fils1.frereg;
+                    node.frered = this.fils1;
+                    this.fils1 = node;
+                    this.fils1.pere = this;
+                } else {
+                    node.frered = this.fils1.frered;
+                    node.frereg = this.fils1;
+                    this.fils1 = node;
+                    this.fils1.pere = this;
+                }
+            } else {
+                while (this.fils1.frered != null && this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
+                    this.decaler1posdroite();
+                }
+                if (this.fils1.name.compareToIgnoreCase(node.name) <= 0) {
+                    node.frered = this.fils1.frered;
+                    node.frereg = this.fils1;
+                    this.fils1 = node;
+                    this.fils1.pere = this;
+                } else {
+                    node.frereg = this.fils1.frereg;
+                    node.frered = this.fils1;
+                    this.fils1 = node;
+                    this.fils1.pere = this;
+                }
+
             }
         }
-        //maj de la taille
+        tmp = this;
+        while (tmp != null){
+            tmp.size += node.size;
+            tmp = tmp.pere;
+        }
     }
 
+    //Méthode qui supprime l'objet appelant
     public void delete () {
-        
-    }
-
-   /** public String info (ArbreFichiers t){ // methode 3
-        String s = "";
-        if (t.type == false){
-            s += "d\n";
-        }else{
-            s += "f\n";
+        int taillearetirer = this.fils1.size;
+        ArbreFichiers tmp;
+        if (this.fils1.frereg == null) {
+            this.fils1.frered.frereg = null;
+            this.fils1 = this.fils1.frered;
         }
-        s += t.name;
-        s += String.valueOf(t.size);
-        if (t.fils1 != null){
-           s += info (t.fils1);
-           if (t.frereg != null){
-               s += info (t.frereg);
-           }
-            if (t.frered != null){
-                s += info (t.frered);
+        if (this.fils1.frered == null) {
+                this.fils1.frereg.frered = null;
+                this.fils1 = this.fils1.frereg;
+        }
+        if (this.fils1.frereg != null && this.fils1.frered != null){
+            tmp = this.fils1;
+            this.fils1 = this.fils1.frereg;
+            this.fils1.frereg = tmp.frereg.frereg;
+            this.fils1.frered = tmp.frered;
+        }
+        tmp = this;
+        while (tmp != null){
+            tmp.size = tmp.size - taillearetirer;
+            tmp = tmp.pere;
+        }
+    }
+    //OK
+
+    //Méthode qui affiche les fils de l'objet appelant
+    public String info (){
+        String s = "";
+        ArbreFichiers tmp = this.fils1;
+        if (this.fils1 != null){
+            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite
+                this.decaler1posgauche();
             }
+            while (this.fils1 != null){//on va jusqu'au bout à droite
+                if (this.fils1.type){
+                    s+="fichier : ";
+                }else{
+                    s+="dossier : ";
+                }
+                s += " " + this.fils1.name + " (taille : " + String.valueOf(this.fils1.size) + " kb)";
+                if (this.fils1.fils1 != null){
+                    s += this.fils1.fils1.info();
+                }
+                s+="\n";
+                this.fils1 = this.fils1.frered;
+            }
+        }
+        this.fils1 = tmp; //pour ne pas perdre le pointeur
+        return s;
+    }
+    //OK
+
+    //Méthode qui affiche le chemin de l'objet appelant depuis la racine
+    public String info_branche (){
+        ArbreFichiers tmp = this;
+        String s = "";
+        while (tmp != null){
+            s = tmp.name + "/" + s;
+            tmp = tmp.pere;
         }
         return s;
     }
 
-**/
-    
-    
-    private File[] listfichiers()/** methode pour la liste des fichiers **/
-    {
-    	
-      
-      if (!m_fichier.isDirectory())
+    //Méthode qui retourne l'arbreFichiers dont le nom est passé en parametre
+    public ArbreFichiers acces (String s) {
+        if (s.equals("..")){
+            return this.pere;
+        }else{
+            while (this.fils1.frereg != null){//on se met tout à gauche pour parcourir de gauche à droite
+                this.decaler1posgauche();
+            }
+            try {
+                while (this.fils1 != null) {//on va jusqu'au bout à droit
+                    if (this.fils1.name.equals(s)) {
+                        return this.fils1;
+                    }
+                    this.fils1 = this.fils1.frered;
+                }
+            }catch(Exception e){
+                System.out.println("Le fichier/dossier \"" + s +"\" n'existe pas");
+            }
+        }
         return null;
-      try
-      {
-        return m_fichier.listFiles();
-      }
-      catch (Exception ex)
-      {
-        JOptionPane.showMessageDialog(null, 
-          "Erreur de lecture du r�pertoire "+m_fichier.getAbsolutePath(),
-          "Warning", JOptionPane.WARNING_MESSAGE);
-        return null;
-      }
     }
-    
-    
-    
-    
-    public String ContientDesSousRepertoires()/** methode 3, verifie si ce sous repertoires a des sous-repertoires **/
-    {
-    	
-      String s = "";
-      File[] fichiers = listfichiers();
-      if (fichiers == null)
-    	  s += "f\n";
-      	
-      for (int k=0; k<fichiers.length; k++)
-      {
-        if (fichiers[k].isDirectory())
-        	s += "d\n";
-      }
-      return s;
-     
-    }
-    private File m_fichier; /**, methode 4, fichier du type File **/
-    	public String toString() /** methode retourne le nom de fichier et son chemin **/
-    	  { 
-    	    return m_fichier.getName().length() > 0 ? m_fichier.getName() : 
-    	      m_fichier.getPath();
-    	  }
+    // OK
 
-    public ArbreFichiers met5 (String s){
-        return new ArbreFichiers();
+    //Méthode qui modifie le pere de l'objet appelant
+    public void setPere(ArbreFichiers pere) {
+        this.pere = pere;
     }
 
-    public void main (String[]args){
-    	new ArbreFichiers();
+    //Methode qui retourne le fils1 de l'objet appelant
+    public ArbreFichiers getFils1() {
+        return fils1;
     }
-    
-    
-    
-    
-    
+
+    //Methode qui modifie le fils1 de l'objet appelant
+    public void setFils1(ArbreFichiers fils1) {
+        this.fils1 = fils1;
+    }
+
+    //Methode qui retourne le frere gauche de l'objet appelant
+    public ArbreFichiers getFrereg() {
+        return frereg;
+    }
+
+    //Methode qui modifie le frere gauche de l'objet appelant
+    public void setFrereg(ArbreFichiers frereg) {
+        this.frereg = frereg;
+    }
+
+    //Methode qui retourne le frere droite de l'objet appelant
+    public ArbreFichiers getFrered() {
+        return frered;
+    }
+
+    //Methode qui modifie le frere droit de l'objet appelant
+    public void setFrered(ArbreFichiers frered) {
+        this.frered = frered;
+    }
+
+    //Methode qui retourne le nom de l'objet appelant
+    public String getName() {
+        return name;
+    }
+
+    //Methode qui retourne le type de l'objet appelant (dossier ou fichier)
+    public boolean isType() {
+        return type;
+    }
+
+    //Methode qui retourne la taille de l'objet appelant
+    public int getSize() {
+        return size;
+    }
 }
